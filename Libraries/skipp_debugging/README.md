@@ -58,4 +58,4 @@ If you wish to make your library public, use `particle library publish` or `Publ
 ## LICENSE
 Copyright 2019 SkippyTheIdiot
 
-Licensed under the <insert your choice of license here> license
+Licensed under the GNU GENERAL PUBLIC LICENSE license
