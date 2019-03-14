@@ -1,6 +1,6 @@
-# skipp_debugging
+# debugging-base
 
-A Particle library for skipp_debugging
+A Particle library for debugging-base
 
 ## Welcome to your library!
 
@@ -16,18 +16,18 @@ _TODO: update this README_
 
 ## Usage
 
-Connect XYZ hardware, add the skipp_debugging library to your project and follow this simple example:
+Connect XYZ hardware, add the debugging-base library to your project and follow this simple example:
 
 ```
-#include "skipp_debugging.h"
-skipp_debugging skipp_debugging;
+#include "debugging-base.h"
+debugging-base debugging-base;
 
 void setup() {
-  skipp_debugging.begin();
+  debugging-base.begin();
 }
 
 void loop() {
-  skipp_debugging.process();
+  debugging-base.process();
 }
 ```
 
@@ -35,7 +35,7 @@ See the [examples](examples) folder for more details.
 
 ## Documentation
 
-TODO: Describe `skipp_debugging`
+TODO: Describe `debugging-base`
 
 ## Contributing
 
@@ -49,7 +49,7 @@ Modify the sources in <src> and <examples> with the new behavior.
 
 To compile an example, use `particle compile examples/usage` command in [Particle CLI](https://docs.particle.io/guide/tools-and-features/cli#update-your-device-remotely) or use our [Desktop IDE](https://docs.particle.io/guide/tools-and-features/dev/#compiling-code).
 
-After your changes are done you can upload them with `particle library upload` or `Upload` command in the IDE. This will create a private (only visible by you) library that you can use in other projects. Do `particle library add skipp_debugging_myname` to add the library to a project on your machine or add the skipp_debugging_myname library to a project on the Web IDE or Desktop IDE.
+After your changes are done you can upload them with `particle library upload` or `Upload` command in the IDE. This will create a private (only visible by you) library that you can use in other projects. Do `particle library add debugging-base_myname` to add the library to a project on your machine or add the debugging-base_myname library to a project on the Web IDE or Desktop IDE.
 
 At this point, you can create a [GitHub pull request](https://help.github.com/articles/about-pull-requests/) with your changes to the original library. 
 
