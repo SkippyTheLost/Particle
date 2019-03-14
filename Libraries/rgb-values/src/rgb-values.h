@@ -1,10 +1,10 @@
-// -------- RGB Colors --------
 
 #ifndef RGB_VALUES
 #define RGB_VALUES
 
+// -------- RGB Colors --------
+
 #define RGB_OFF	    0, 0, 0
-#define RGB_BLACK   0, 0, 0
 #define RGB_WHITE	127, 127, 255
 #define RGB_SILVER	191, 191, 191
 #define RGB_GREY	127, 127, 127
