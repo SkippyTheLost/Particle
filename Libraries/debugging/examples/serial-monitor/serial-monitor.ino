@@ -1,16 +1,16 @@
-// Example usage for debugging_base library by SkippyTheIdiot.
+// Example usage for debugging library by SkippyTheIdiot.
 
-#include "debugging_base.h"
+#include "debugging.h"
 
 // Initialize objects from the lib
-Debugging_base debugging_base;
+Debugging debugging;
 
 void setup() {
     // Call functions on initialized library objects that require hardware
-    debugging_base.begin();
+    debugging.begin();
 }
 
 void loop() {
     // Use the library's initialized objects and functions
-    debugging_base.process();
+    debugging.process();
 }
