@@ -6,3 +6,6 @@ pause
 
 @echo on
 particle library upload
+@echo off
+
+pause
