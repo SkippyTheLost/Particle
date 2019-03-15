@@ -1,2 +1,2 @@
 # Particle
-A collection of Particle-based projects and libraries
+A mess of Particle-based scripts
