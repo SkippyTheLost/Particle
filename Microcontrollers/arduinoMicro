@@ -1,0 +1,27 @@
+Arduino Micro
+
+Software
+    Arduino IDE
+
+Technical Specifications
+    Microcontroller: ATmega32U4
+    Operating Voltage: 5V
+    Input Voltage (recommended): 7-12V
+    Input Voltage (limit): 6-20V
+    Digital I/O Pins: 20
+    PWM Channels: 7
+    Analog Input Channels: 12
+    DC Current per I/O Pin: 20 mA
+    DC Current for 3.3V Pin: 50 mA
+    Flash Memory: 32 KB (ATmega32U4) of which 4 KB used by bootloader
+    SRAM: 2.5 KB (ATmega32U4)
+    EEPROM: 1 KB (ATmega32U4)
+    Clock Speed: 16 MHz
+    LED_BUILTIN: 13
+    Length: 48 mm
+    Width: 18 mm
+    Weight: 13 g
+
+Schematics: https://content.arduino.cc/assets/arduino_micro_schematic.pdf
+
+Source: https://store.arduino.cc/arduino-micro

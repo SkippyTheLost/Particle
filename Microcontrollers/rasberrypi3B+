@@ -1,0 +1,13 @@
+Rasberry Pi 3 Model B+
+
+Features
+    Supports Linux
+    Wifi
+    Bluetooth
+    Video / Audio out
+    USB
+    Particle IDE (No longer supported)
+
+Schematics: https://www.raspberrypi.org/documentation/hardware/raspberrypi/schematics/rpi_SCH_3bplus_1p0_reduced.pdf
+
+Source: https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/
