@@ -29,4 +29,4 @@ All scripts designed for use with the Particle Web IDE (https://build.particle.i
 * How to use these files for **teaching and learning**
     * Don't
     * If you actually want to, you are very welcome to. I *highly* suggest finding something better
-    * Link back to this repository when refering to the code, and attach a link to the repository to any snippets taken from here
+    * Link back to this repository when refering to the code somewhere in any presentation containing snippets
