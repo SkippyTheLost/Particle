@@ -14,10 +14,12 @@ All scripts designed for use with the Particle Web IDE (https://build.particle.i
   * You can edit like there's no tommorrow
   * Please link back to this repository
   * That's basically it, have fun
+	* I'll try to help out, but that isn't guarenteed
 * How to use these files for **educational projects**
   * Agian, go nuts with the editing
   * Don't claim you wrote this
   * Link back to this repository, otherwise that's plagirism
+	* You can ask me for help, but you probably know more than I do
   * Seriously, don't claim you wrote any of this crap, you'll probably get an F
 * How to use these files for **professional projects**
 	* First of all, question how much you really need this, it is *terrible*
