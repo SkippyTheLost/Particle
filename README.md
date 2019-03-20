@@ -13,8 +13,8 @@ All scripts designed for use with the Particle Web IDE (https://build.particle.i
 * How to use these files for **personal projects**
   * You can edit like there's no tommorrow
   * Please link back to this repository
+  * I'll try to help out, but that isn't guarenteed
   * That's basically it, have fun
-	* I'll try to help out, but that isn't guarenteed
 * How to use these files for **educational projects**
   * Agian, go nuts with the editing
   * Don't claim you wrote this
