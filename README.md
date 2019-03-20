@@ -1,17 +1,19 @@
 # Particle
 A mess of Particle-based scripts
 
-All scripts designed for use with the Particle Web IDE (https://build.particle.io) unless otherwise specified
+All scripts designed for use with the Particle Web IDE (https://build.particle.io) unless otherwise specified.
+
+
 
 
 **License TL;DR**
 
-*This currently is not perfectly reflected in LICENSE, but these are how the copyright should be interpereted*
+*Note: Nothing written here is binding, refer to the actual license file.*
 
 * How to use these files for **personal projects**
   * You can edit like there's no tommorrow
   * Please link back to this repository
-  * That's it, have fun
+  * That's basically it, have fun
   
 * How to use these files for **educational projects**
   * Agian, go nuts with the editing
@@ -23,10 +25,11 @@ All scripts designed for use with the Particle Web IDE (https://build.particle.i
     * First of all, question how much you really need this, it is *terrible*
 	* Still here? Um... You can change, add to, what ever you want to do with it
 	* Link back to this repository
-	* Selling software that depends on this repository is fine, selling access to code available here is not
+	* Selling software that depends on this repository is fine
+	* Don't come crying to me if my code causes WW3
 	* I'd also love to know what it was used for, but that isn't important
 	
 * How to use these files for **teaching and learning**
     * Don't
     * If you actually want to, you are very welcome to. I *highly* suggest finding something better
-    * Link back to this repository when refering to the code somewhere in any presentation containing snippets
+    * Link back to this repository
