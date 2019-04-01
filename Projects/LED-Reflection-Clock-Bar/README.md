@@ -1,5 +1,5 @@
 # LED Reflection Clock
-*This project is based on the Hackster.io project below*
+**This project is based on the Hackster.io project below**
 
 
 Name: LED Reflection Clock
