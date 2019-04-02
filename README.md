@@ -1,5 +1,7 @@
 # Particle
-A mess of Particle-based scripts
+A mess of Particle-based scripts.
+
+Kindly refer to the Wiki for usage guides.
 
 All scripts designed for use with the Particle Web IDE (https://build.particle.io) unless otherwise specified.
 
