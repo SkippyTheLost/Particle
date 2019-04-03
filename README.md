@@ -5,8 +5,7 @@ Kindly refer to the Wiki for usage guides.
 
 All scripts designed for use with the Particle Web IDE (https://build.particle.io) unless otherwise specified.
 
-
-
+*Contact me with any question you have, and I'll try to respond.*
 
 **License TL;DR**
 
@@ -35,4 +34,5 @@ All scripts designed for use with the Particle Web IDE (https://build.particle.i
 	* If you actually want to, you are very welcome to. I *highly* suggest finding something better.
 	* Link back to this repository.
 	* You can ask me for help, but no promises that I will.
-*Contact me with any question you have, and I'll try to respond.
+	
+
