@@ -7,7 +7,7 @@ All scripts designed for use with the Particle Web IDE (https://build.particle.i
 
 *Contact me with any question you have, and I'll try to respond.*
 
-**License TL;DR**
+### License TL;DR
 
 *Note: Nothing written here is binding, refer to the actual license file.*
 
