@@ -65,7 +65,6 @@ class Scene { // scene
             normal(void) {
                 allLedsOn(RGB_ORANGE);
                 /*
-                // Castle
                 pixels.setPixelColor( 0, RGB_ORANGE);
                 pixels.setPixelColor( 1, 255, 172, 0);
                 pixels.setPixelColor( 2, 255, 185, 0);
@@ -74,26 +73,16 @@ class Scene { // scene
                 pixels.setPixelColor( 5, 255, 224, 0);
                 pixels.setPixelColor( 6, 255, 237, 0);
                 pixels.setPixelColor( 7, RGB_YELLOW);
-                
-                // Cogsworth
                 pixels.setPixelColor( 8, RGB_WHITE);
-                
-                // Lumiere
                 pixels.setPixelColor( 9, RGB_WHITE);
-                
-                // Beauty & the Beast
                 pixels.setPixelColor(10, RGB_WHITE);
                 pixels.setPixelColor(11, RGB_WHITE);
                 pixels.setPixelColor(12, RGB_WHITE);
                 pixels.setPixelColor(13, RGB_WHITE);
                 pixels.setPixelColor(14, RGB_WHITE);
                 pixels.setPixelColor(15, RGB_WHITE);
-                
-                // Mrs. Potts & Chip
                 pixels.setPixelColor(16, RGB_WHITE);
                 pixels.setPixelColor(17, RGB_WHITE);
-                
-                // Rose
                 pixels.setPixelColor(18, RGB_ORANGE);
                 
                 pixels.show();
