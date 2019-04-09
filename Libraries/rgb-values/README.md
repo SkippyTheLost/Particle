@@ -1,4 +1,4 @@
-# rgb-values
+# rgb-values [Public]
 
 A Particle library for rgb-values
 
