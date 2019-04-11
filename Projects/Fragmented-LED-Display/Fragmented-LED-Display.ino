@@ -28,20 +28,22 @@ const char *PREFIX = "mesh-";
 #define DEVICE_COUNT 5
 
 String deviceIndex[DEVICE_COUNT] = {
-    Argon_Deer,
-    Xenon_Walrus,
-    Xenon_Dolphin,
-    Xenon_Pidgeon,
-    Xenon_Gerbil};
+    "e00fce68c53ccfdee0b50daf", // Argon_Deer - First device should be the gateway
+    "e00fce6869b327e5ae5d0ec3", // Xenon_Walrus
+    "e00fce68c9aeec0865ba4f3b", // Xenon_Dolphin
+    "e00fce6804367d126b413dd6", // Xenon_Pidgeon
+    "e00fce68b7f8aef5886dee81"  // Xenon_Gerbil
+};
 
 int deviceNo = GetDeviceNo();
 
 String deviceStatus[DEVICE_COUNT] = {
-    "gateway",
-    "off",
-    "off",
-    "off",
-    "off"};
+    "gateway", // Argon Deer
+    "off",     // Xenon_Walrus
+    "off",     // Xenon_Dolphin
+    "off",     // Xenon_Pidgeon
+    "off"      // Xenon_Gerbil
+};
 
 Adafruit_NeoPixel leds = Adafruit_NeoPixel(PIXEL_COUNT, PIXEL_PIN, PIXEL_TYPE);
 
