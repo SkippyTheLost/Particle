@@ -1,8 +1,10 @@
 :: A quick way to update the firmware across all of the devices
-
+@ echo off
+echo Flashing all Project Devices
 particle compile xenon --saveTo xenon.bin
-
+echo.
 :: Follow the following structure, add each Xenon
+echo Flashing Xenons in background
 start /min cmd.exe /c particle flash Xenon_Walrus xenon.bin
 start /min cmd.exe /c particle flash Xenon_Dolphin xenon.bin
 start /min cmd.exe /c particle flash Xenon_Pidgeon xenon.bin
