@@ -1,9 +1,9 @@
 // System
-SYSTEM_THREAD(ENABLED); // Keeps Mesh active without internet
+SYSTEM_THREAD(ENABLED); // 
 
 // Libraries
-#include "neopixel.h"   // Library to control programmable LEDs
-#include "rgb-values.h" // Library to simplify RGB colors
+#include "neopixel.h"   // Controls programmable LEDs
+#include "rgb-values.h" // Simplifies RGB colors
 
 // Settings
 #define PIXEL_COUNT 1 // Integer - How many LEDs there are
@@ -18,6 +18,8 @@ SYSTEM_THREAD(ENABLED); // Keeps Mesh active without internet
 
 #define FADE_SPEED 10 // Integer - Fade processed as a (200 / FADE_SPEED) millisecond delay between each of the steps
 
+#define SWITCH_PIN A0 // Pin - Where the switch is wired to the gateway
+
 const char *PREFIX = "mesh-"; // String - Used as a prefix for all mesh calls
 
 #define DEVICE_COUNT 5 // Integer - Total number of devices included
@@ -29,9 +31,7 @@ const String deviceIndex[DEVICE_COUNT] = {
     "e00fce6804367d126b413dd6", // Xenon_Pidgeon
     "e00fce68b7f8aef5886dee81"  // Xenon_Gerbil
 };
-// String Array - Lists the Device ID of each device to assign them a number. 0 is the first entry in the list, followed by 1, 2, etc. 0 should by the gateway.
-
-int deviceNo = GetDeviceNo(); // Sets the device number for each device based on deviceIndex[].
+// String Array - Lists the Device ID of each device to assign them a number. 0 is the first entry in the list, and should always be the gateway.
 
 String deviceStatus[DEVICE_COUNT] = {
     "gateway", // Argon Deer
@@ -40,9 +40,11 @@ String deviceStatus[DEVICE_COUNT] = {
     "off",     // Xenon_Pidgeon
     "off"      // Xenon_Gerbil
 };
-// String Array to store the status of each device. Gateway should never change.
+// String Array to store the status of each device. Only used on the Gateway.
 
-Adafruit_NeoPixel leds = Adafruit_NeoPixel(PIXEL_COUNT, PIXEL_PIN, PIXEL_TYPE); // Sets up the LEDs so that they can be controlled with a led.function() call.
+int deviceNo = GetDeviceNo(); // Sets the device number for each device based on deviceIndex[].
+
+Adafruit_NeoPixel leds = Adafruit_NeoPixel(PIXEL_COUNT, PIXEL_PIN, PIXEL_TYPE); // Sets up the LEDs so that they can be controlled with a leds.function() call.
 
 int color[3] = {0, 0, 0}; // Integer Array - Current Color. color[0] is red, color[1] is green, and color[2] is blue. No value should exceed 255.
 
@@ -59,15 +61,22 @@ void setup()
     switch (deviceNo)
     {
     case 0: // Gateway - Deer
-        Mesh.subscribe(PREFIX, meshHandler);
+        Mesh.subscribe(PREFIX, gatewayHandler); // Gateway recieves all event calls with PREFIX
 
-        pinMode(A0, INPUT_PULLUP);
-        //attachInterrupt(A0, buttonInterrupt, RISING);
+        //Particle.variable("Gateway Status", deviceStatus[0]);
+
+        Particle.variable("Device 1 Status", deviceStatus[1]);
+        Particle.variable("Device 2 Status", deviceStatus[2]);
+        Particle.variable("Device 3 Status", deviceStatus[3]);
+        Particle.variable("Device 4 Status", deviceStatus[4]);
+
+        pinMode(SWITCH_PIN, INPUT_PULLUP); // Sets up the input for the momentary push-button switch.
+        //attachInterrupt(SWITCH_PIN, buttonInterrupt, RISING); // Attaches an interrupt to the momentary switch.
         break;
-    default:
-        leds.begin();
-        leds.show();
-        Mesh.subscribe(PREFIX + deviceIndex[deviceNo], deviceHandler);
+    default: // Every device except Gateway
+        leds.begin(); // Prime the LEDs
+        leds.show(); // Set the LEDs to off
+        Mesh.subscribe(PREFIX + deviceIndex[deviceNo], deviceHandler); // Slave devices only recieves event calls with it's Device ID attached.
         break;
     }
     Particle.connect();
@@ -79,7 +88,7 @@ void loop()
     {
         digitalWrite(D7, LOW);
         connected = true;
-    }
+    } // Uses the on-board LED to display when the device is connected to the Mesh and the Particle Cloud.
 
     switch (deviceNo)
     {
@@ -91,32 +100,31 @@ void loop()
     case 3:  // Pidgeon
     case 4:  // Gerbil
     default: // If can't determine deviceNo
-
+        // Only Gateway currently has functions in loop().
         break;
     }
     Particle.process();
     delay(1000);
 } // This runs infinitely, immediately after the device turns on.
 
-String lastMeshEvent = "";
-String lastMeshData = "";
-void meshHandler(const char *event, const char *data)
+String lastEvent = ""; // String - Last Mesh event recieved
+String lastData = "";  // String - Last Mesh data recieved
+
+void gatewayHandler(const char *event, const char *data)
 {
-    lastMeshEvent = event;
-    lastMeshData = data;
+    lastEvent = event;
+    lastData = data;
 
     for (int i = 1; i < DEVICE_COUNT; i++)
     {
-        if (lastMeshEvent == PREFIX + deviceIndex[i])
+        if (lastEvent == PREFIX + deviceIndex[i])
         {
-            deviceStatus[i] = lastMeshData;
+            deviceStatus[i] = lastData;
             return;
         }
     }
 } // Gateway based calls
 
-String lastEvent = "";
-String lastData = "";
 void deviceHandler(const char *event, const char *data)
 {
     lastEvent = event;
