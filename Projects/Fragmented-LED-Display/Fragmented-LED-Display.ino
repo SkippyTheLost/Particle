@@ -2,12 +2,13 @@
 SYSTEM_THREAD(ENABLED); // Keeps Mesh active without internet
 
 // Libraries
-#include "neopixel.h"
-#include "rgb-values.h"
+#include "neopixel.h"   // Library to control programmable LEDs
+#include "rgb-values.h" // Library to simplify RGB colors
 
 // Settings
-#define PIXEL_COUNT 1
-#define PIXEL_PIN D0
+#define PIXEL_COUNT 1 // Integer - How many LEDs there are
+
+#define PIXEL_PIN D0 // Pin - Where the LEDs data is wired
 
 //#define PIXEL_TYPE WS2811
 #define PIXEL_TYPE WS2812B
@@ -15,27 +16,22 @@ SYSTEM_THREAD(ENABLED); // Keeps Mesh active without internet
 //#define PIXEL_TYPE WS2813
 //#define PIXEL_TYPE SK6812RGBW
 
-#define FADE_SPEED 10
+#define FADE_SPEED 10 // Integer - Fade processed as a (200 / FADE_SPEED) millisecond delay between each of the steps
 
-const char *PREFIX = "mesh-";
+const char *PREFIX = "mesh-"; // String - Used as a prefix for all mesh calls
 
-#define Argon_Deer "e00fce68c53ccfdee0b50daf"
-#define Xenon_Walrus "e00fce6869b327e5ae5d0ec3"
-#define Xenon_Dolphin "e00fce68c9aeec0865ba4f3b"
-#define Xenon_Pidgeon "e00fce6804367d126b413dd6"
-#define Xenon_Gerbil "e00fce68b7f8aef5886dee81"
+#define DEVICE_COUNT 5 // Integer - Total number of devices included
 
-#define DEVICE_COUNT 5
-
-String deviceIndex[DEVICE_COUNT] = {
+const String deviceIndex[DEVICE_COUNT] = {
     "e00fce68c53ccfdee0b50daf", // Argon_Deer - First device should be the gateway
     "e00fce6869b327e5ae5d0ec3", // Xenon_Walrus
     "e00fce68c9aeec0865ba4f3b", // Xenon_Dolphin
     "e00fce6804367d126b413dd6", // Xenon_Pidgeon
     "e00fce68b7f8aef5886dee81"  // Xenon_Gerbil
 };
+// String Array - Lists the Device ID of each device to assign them a number. 0 is the first entry in the list, followed by 1, 2, etc. 0 should by the gateway.
 
-int deviceNo = GetDeviceNo();
+int deviceNo = GetDeviceNo(); // Sets the device number for each device based on deviceIndex[].
 
 String deviceStatus[DEVICE_COUNT] = {
     "gateway", // Argon Deer
@@ -44,15 +40,14 @@ String deviceStatus[DEVICE_COUNT] = {
     "off",     // Xenon_Pidgeon
     "off"      // Xenon_Gerbil
 };
+// String Array to store the status of each device. Gateway should never change.
 
-Adafruit_NeoPixel leds = Adafruit_NeoPixel(PIXEL_COUNT, PIXEL_PIN, PIXEL_TYPE);
+Adafruit_NeoPixel leds = Adafruit_NeoPixel(PIXEL_COUNT, PIXEL_PIN, PIXEL_TYPE); // Sets up the LEDs so that they can be controlled with a led.function() call.
 
-int red = 0;
-int green = 0;
-int blue = 0;
+int color[3] = {0, 0, 0}; // Integer Array - Current Color. color[0] is red, color[1] is green, and color[2] is blue. No value should exceed 255.
 
-bool status = false;
-bool connected = false;
+bool status = false;    // Boolean - True when the current device's LED(s) are on or turning on.
+bool connected = false; // Boolean - True after Mesh is connected and a connection to Paricle Cloud is established.
 
 void setup()
 {
@@ -76,11 +71,11 @@ void setup()
         break;
     }
     Particle.connect();
-}
+} // This runs once, immediately after the device turns on.
 
 void loop()
 {
-    if (Particle.connected() && Mesh.ready() && !connected)
+    if (!connected && Particle.connected() && Mesh.ready())
     {
         digitalWrite(D7, LOW);
         connected = true;
@@ -99,9 +94,9 @@ void loop()
 
         break;
     }
-    delay(1000);
     Particle.process();
-}
+    delay(1000);
+} // This runs infinitely, immediately after the device turns on.
 
 String lastMeshEvent = "";
 String lastMeshData = "";
@@ -220,7 +215,7 @@ void LED(bool setTo)
         case 4: // Gerbil
             fade(RGB_ORANGE, FADE_SPEED);
             break;
-        default:
+        default: // No device number specific programming set
             set(RGB_WHITE);
             break;
         }
@@ -233,11 +228,11 @@ void LED(bool setTo)
             case 0: // Deer
                 digitalWrite(D7, LOW);
                 break;
-            case 1: // Walrus
-            case 2: // Dolphin
-            case 3: // Pidgeon
-            case 4: // Gerbil
-            default:
+            case 1:  // Walrus
+            case 2:  // Dolphin
+            case 3:  // Pidgeon
+            case 4:  // Gerbil
+            default: // No device number specific programming set
                 fade(RGB_OFF, FADE_SPEED);
                 break;
             }
@@ -262,9 +257,9 @@ void fade(byte R, byte G, byte B, int speed)
     {
         for (int i = 0; i < PIXEL_COUNT; i++)
         {
-            int curR = map(j, 0, STEPS, red, R);
-            int curG = map(j, 0, STEPS, green, G);
-            int curB = map(j, 0, STEPS, blue, B);
+            int curR = map(j, 0, STEPS, color[0], R);
+            int curG = map(j, 0, STEPS, color[1], G);
+            int curB = map(j, 0, STEPS, color[2], B);
 
             leds.setPixelColor(i, curR, curG, curB); // (Pixel number, Red, Green, Blue, [White])
         }
@@ -272,9 +267,9 @@ void fade(byte R, byte G, byte B, int speed)
         delay(200 / speed);
     }
 
-    red = R;
-    green = G;
-    blue = B;
+    color[0] = R;
+    color[1] = G;
+    color[2] = B;
 
     set(R, G, B);
 } // Fade in all pixels to static color
