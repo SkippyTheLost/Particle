@@ -1,8 +1,14 @@
 :: A quick way to update the firmware across all of the devices
 @ echo off
-echo Flashing gateway Project Device
+echo Compiling Project
 particle compile argon --saveTo argon.bin
 :: particle compile boron --saveTo argon.bin
+
+timeout 5
+
+echo.
+echo Flashing gateway Project Device
+echo.
 
 :: Replace this with the Argon gateway
 particle flash Argon_Deer argon.bin
