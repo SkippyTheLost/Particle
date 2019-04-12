@@ -3,6 +3,8 @@
 echo Flashing all Project Devices
 particle compile xenon --saveTo xenon.bin
 echo.
+timeout 10
+echo.
 :: Follow the following structure, add each Xenon
 echo Flashing Xenons in background
 start /min cmd.exe /c particle flash Xenon_Walrus xenon.bin
