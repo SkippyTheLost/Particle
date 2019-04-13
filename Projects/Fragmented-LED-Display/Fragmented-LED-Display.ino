@@ -1,5 +1,5 @@
 // System
-SYSTEM_THREAD(ENABLED); // 
+SYSTEM_THREAD(ENABLED); // Allows system to start without a connection to the Particle Cloud
 
 // Libraries
 #include "neopixel.h"   // Controls programmable LEDs
