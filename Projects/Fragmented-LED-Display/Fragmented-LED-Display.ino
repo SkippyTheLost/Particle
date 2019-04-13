@@ -75,8 +75,6 @@ Adafruit_NeoPixel leds = Adafruit_NeoPixel(PIXEL_COUNT, PIXEL_PIN, PIXEL_TYPE); 
 
 void setup()
 {
-    Particle.function("Button", button); // Simulate a button press through Particle CLoud
-
     pinMode(INDICATOR_PIN, OUTPUT); // Set up indicator LED
     digitalWrite(INDICATOR_PIN, HIGH);
 
@@ -155,7 +153,6 @@ void gateway()
 void buttonInterrupt()
 {
     status = !status;
-    return status ? 1 : 0;
 }
 #pragma endregion Interrupts
 
