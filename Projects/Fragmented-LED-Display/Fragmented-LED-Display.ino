@@ -49,7 +49,7 @@ Adafruit_NeoPixel leds = Adafruit_NeoPixel(PIXEL_COUNT, PIXEL_PIN, PIXEL_TYPE); 
 int color[3] = {0, 0, 0}; // Integer Array - Current Color. color[0] is red, color[1] is green, and color[2] is blue. No value should exceed 255.
 
 bool status = false;    // Boolean - True when the current device's LED(s) are on or turning on.
-bool connected = false; // Boolean - True after Mesh is connected and a connection to Paricle Cloud is established.
+bool connected = false; // Boolean - True after Mesh is connected.
 
 void setup()
 {
@@ -61,22 +61,15 @@ void setup()
     switch (deviceNo)
     {
     case 0: // Gateway - Deer
-        Mesh.subscribe(PREFIX, gatewayHandler); // Gateway recieves all event calls with PREFIX
-
-        //Particle.variable("Gateway Status", deviceStatus[0]);
-
-        Particle.variable("Device 1 Status", deviceStatus[1]);
-        Particle.variable("Device 2 Status", deviceStatus[2]);
-        Particle.variable("Device 3 Status", deviceStatus[3]);
-        Particle.variable("Device 4 Status", deviceStatus[4]);
+        Mesh.subscribe(PREFIX, gatewayHandler); // Gateway recieves all mesh calls with PREFIX
 
         pinMode(SWITCH_PIN, INPUT_PULLUP); // Sets up the input for the momentary push-button switch.
-        //attachInterrupt(SWITCH_PIN, buttonInterrupt, RISING); // Attaches an interrupt to the momentary switch.
+        attachInterrupt(SWITCH_PIN, buttonInterrupt, RISING); // Attaches an interrupt to the momentary switch.
         break;
     default: // Every device except Gateway
         leds.begin(); // Prime the LEDs
-        leds.show(); // Set the LEDs to off
-        Mesh.subscribe(PREFIX + deviceIndex[deviceNo], deviceHandler); // Slave devices only recieves event calls with it's Device ID attached.
+        leds.show();  // Set the LEDs to off
+        Mesh.subscribe(PREFIX + deviceIndex[deviceNo], deviceHandler); // Slave devices only recieve mesh calls with it's Device ID attached.
         break;
     }
     Particle.connect();
@@ -84,12 +77,6 @@ void setup()
 
 void loop()
 {
-    if (!connected && Particle.connected() && Mesh.ready())
-    {
-        digitalWrite(D7, LOW);
-        connected = true;
-    } // Uses the on-board LED to display when the device is connected to the Mesh and the Particle Cloud.
-
     switch (deviceNo)
     {
     case 0: // Gateway - Deer
@@ -100,7 +87,11 @@ void loop()
     case 3:  // Pidgeon
     case 4:  // Gerbil
     default: // If can't determine deviceNo
-        // Only Gateway currently has functions in loop().
+        if (!connected && Mesh.ready())
+        {
+            digitalWrite(D7, LOW);
+            connected = true;
+        } // Uses the on-board LED to display when the device is connected to the Mesh
         break;
     }
     Particle.process();
@@ -123,7 +114,7 @@ void gatewayHandler(const char *event, const char *data)
             return;
         }
     }
-} // Gateway based calls
+} // Gateway based mesh calls
 
 void deviceHandler(const char *event, const char *data)
 {
@@ -156,12 +147,17 @@ void deviceHandler(const char *event, const char *data)
         }
         break;
     }
-} // Device ID based calls
+} // Device ID based mesh calls
 
 int button(String string)
 {
     status = !status;
     return status ? 1 : 0;
+}
+
+void buttonInterrupt()
+{
+    button("");
 }
 
 int GetDeviceNo()
@@ -180,6 +176,7 @@ void gateway()
 {
     if (status)
     {
+        digitalWrite(D7, HIGH);
         for (int i = 1; i < DEVICE_COUNT; i++)
         {
             if (deviceStatus[i] == "off")
@@ -191,6 +188,7 @@ void gateway()
     }
     else
     {
+        digitalWrite(D7, LOW);
         for (int i = 1; i < DEVICE_COUNT; i++)
         {
             if (deviceStatus[i] == "on")
@@ -275,9 +273,9 @@ void fade(byte R, byte G, byte B, int speed)
         delay(200 / speed);
     }
 
-    color[0] = R;
-    color[1] = G;
-    color[2] = B;
+    color[0] = R; // Store the current Red value
+    color[1] = G; // Store the current Green value
+    color[2] = B; // Store the current Blue value
 
     set(R, G, B);
 } // Fade in all pixels to static color
