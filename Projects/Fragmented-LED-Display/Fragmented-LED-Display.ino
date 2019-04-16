@@ -9,7 +9,7 @@ SYSTEM_THREAD(ENABLED); // Allows system to start without a connection to the Pa
 
 #pragma region Settings
 // Settings
-#define PIXEL_COUNT 1 // Integer - How many LEDs there are
+#define PIXEL_COUNT 60 // Integer - How many LEDs there are
 
 #define PIXEL_PIN D0 // Pin - Where the LEDs data is wired
 
